@@ -56,7 +56,8 @@ end
 Elasticsearch::Logstash::Registry.add(Car, :car)
 
 # Now any time you search the index `car`, it will be handled by the Car model.
-client.search(index: :car, q: "passengers:4")
+client.search(index: :cars, q: "passengers:4")  # => Response[Car]
+client.get(index: :cars, type: :car, id: 2)     # => Response[Car]
 ```
 
 ## Development

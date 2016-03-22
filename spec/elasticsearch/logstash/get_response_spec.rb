@@ -1,13 +1,14 @@
-require 'elasticsearch/logstash/search_response'
+require 'elasticsearch/logstash/get_response'
 
 module Elasticsearch
   module Logstash
-    describe SearchResponse do
-      subject = SearchResponse.new SAMPLE_RESPONSE
+    describe GetResponse do
+      first_response = SAMPLE_RESPONSE['hits']['hits'][0]
+      subject = GetResponse.new first_response
 
       describe '#raw_json' do
         it "is the parsed JSON" do
-          expect(subject.raw_json).to eq SAMPLE_RESPONSE
+          expect(subject.raw_json).to eq first_response
         end
       end
 
@@ -17,24 +18,12 @@ module Elasticsearch
         end
       end
 
-      describe "#total" do
-        it "returns the total hits" do
-          expect(subject.total).to be 2_447
-        end
-      end
-
-      describe "#size" do
-        it "returns the size of the payload" do
-          expect(subject.size).to be 3
-        end
-      end
-
       describe "#body" do
         it "maps the chosen model to the body" do
           body = subject.body
 
-          expect(body).to all(be_a(Model))
-          expect(body.first.id).to eq 'AVOatY7oTrQdHcxd1FrN'
+          expect(body).to be_a Model
+          expect(body.id).to eq 'AVOatY7oTrQdHcxd1FrN'
         end
       end
 
