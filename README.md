@@ -1,6 +1,6 @@
-# Elasticsearch::Logstash
+# Logtastic
 
-This is a gem to allow you to more easily communicate with your Elasticsearch
+This is a gem to allow you to more easily read from your Elasticsearch
 index of Logstash messages, using their default schema.
 
 ## Installation
@@ -8,7 +8,7 @@ index of Logstash messages, using their default schema.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'elasticsearch-logstash', git: "git@github.com:berfarah/elasticsearch-logstash.git"
+gem 'logtastic', git: "git@github.com:berfarah/logtastic.git"
 ```
 
 And then execute:
@@ -22,7 +22,7 @@ You can use the client to `#search` pretty much in the same way you would use
 Elasticsearch::Client
 
 ```rb
-client = Elasticsearch::Logstash.client.new(host: ENV.fetch('ELASTICSEARCH_HOST'))
+client = Logtastic.client.new(host: ENV.fetch('ELASTICSEARCH_HOST'))
 client.search(index: :my_index, q: "term:foo")
 ```
 
@@ -31,10 +31,10 @@ model for responses exposes `id`, `timestamp` and `message` to `#as_json`. It
 grabs `timestamp` and `message` from the `"_source"` attribute in the Elasticsearch
 response.
 
-You can `delegate`, `expose` and `hide` methods in a `Elasticsearch::Logstash::Model`:
+You can `delegate`, `expose` and `hide` methods in a `Logtastic::Model`:
 
 ```rb
-class Car < Elasticsearch::Logstash::Model
+class Car < Logtastic::Model
   # fetches from "_source": { "passengers" => 5 }
   # creates the #passengers method
   # exposes :passengers in #as_json
@@ -53,7 +53,7 @@ class Car < Elasticsearch::Logstash::Model
 end
 
 # You need to register your model for it to automatically be handled
-Elasticsearch::Logstash::Registry.add(Car, :car)
+Logtastic::Registry.add(Car, :car)
 
 # Now any time you search the index `car`, it will be handled by the Car model.
 client.search(index: :cars, q: "passengers:4")  # => Response[Car]
@@ -68,7 +68,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/berfarah/elasticsearch-logstash. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/berfarah/logtastic. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
 
 
 ## License

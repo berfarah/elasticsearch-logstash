@@ -1,17 +1,17 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'elasticsearch/logstash/version'
+require 'logtastic/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "elasticsearch-logstash"
-  spec.version       = Elasticsearch::Logstash::VERSION
+  spec.name          = "logtastic"
+  spec.version       = Logtastic::VERSION
   spec.authors       = ["Bernardo Farah"]
   spec.email         = ["ber@bernardo.me"]
 
-  spec.summary       = %q{Get your Logstash resources from Elasticsearch easily}
+  spec.summary       = %q{Read your Logstash resources from Elasticsearch easily}
   spec.description   = %q{Use models to expose attributes and structure your Logstash data}
-  spec.homepage      = "https://github.com/berfarah/elasticsearch-logstash"
+  spec.homepage      = "https://github.com/berfarah/logtastic"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
