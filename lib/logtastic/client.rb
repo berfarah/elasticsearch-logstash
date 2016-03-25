@@ -21,7 +21,7 @@ module Logtastic
     private
 
     def options(args = {})
-      { q: "*", sort: "@timestamp:desc" }.merge args
+      { sort: "@timestamp:desc" }.merge args
     end
   end
 end
