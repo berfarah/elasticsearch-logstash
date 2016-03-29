@@ -11,17 +11,19 @@ module Logtastic
     end
 
     def search(**args)
-      SearchResponse.new client.search(options(args)), model(args)
+      model = model_from(args)
+      SearchResponse.new client.search(options(args)), model
     end
 
     def get(**args)
-      SingleResponse.new client.get(**args), model(args)
+      model = model_from(args)
+      SingleResponse.new client.get(**args), model
     end
 
     private
 
-    def model(args = {})
-      model = args[:model] || args[:index] || args[:type]
+    def model_from(args = {})
+      model = args.delete(:model) || args[:index] || args[:type]
       model.to_s.to_sym
     end
 
