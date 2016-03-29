@@ -11,14 +11,19 @@ module Logtastic
     end
 
     def search(**args)
-      SearchResponse.new client.search(options(args)), args[:index].to_s.to_sym
+      SearchResponse.new client.search(options(args)), model(args)
     end
 
     def get(**args)
-      SingleResponse.new client.get(**args), args[:index].to_s.to_sym
+      SingleResponse.new client.get(**args), model(args)
     end
 
     private
+
+    def model(args = {})
+      model = args[:model] || args[:index] || args[:type]
+      model.to_s.to_sym
+    end
 
     def options(args = {})
       { sort: "@timestamp:desc" }.merge args

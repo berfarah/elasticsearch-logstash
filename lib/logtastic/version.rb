@@ -1,3 +1,7 @@
 module Logtastic
-  VERSION = "0.3.1"
+  MAJOR   = 0
+  MINOR   = 4
+  PATCH   = 1
+
+  VERSION = [MAJOR, MINOR, PATCH].join(".").freeze
 end
